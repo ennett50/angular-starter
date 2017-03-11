@@ -1,0 +1,14 @@
+section#todoapp
+    header#header
+        h1 todos
+        form.form-group(name='todoForm', ng-submit='addTodo()')
+            input#new-todo.form-control(placeholder='Что нужно сделать?', ng-model='newTodo', autofocus='')
+    div(ng-if='todos.length')
+        p Заданий к выполнению: {{todos.length}}
+        ul#todo-list.list-group
+            li.list-group-item(ng-repeat='todo in todos')
+                .view
+                    label {{todo.title}}
+                    !='\n'
+                    button.btn.btn-danger.btn-sm(ng-click='removeTodo(todo)') Удалить
+    p(ng-if='!todos.length') Вы не добавили заданий.

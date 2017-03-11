@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="todomvc" class="no-js">
+<head>
+    <title>AngularJS • TodoMVC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <!-- [ START ] Стили проекта-->
+    <link rel="stylesheet" type="text/css" href="./css/vendor.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/production.css">
+</head>
+<body>
+<main>
+    <nav role="navigation" class="navbar navbar-default navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display-->
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span
+                        class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+
+        <todo-list></todo-list>
+
+    </div>
+</main>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+    </div>
+</footer>
+<!-- [ START ] Скрипты библиотек-->
+<script src="./js/common.js"></script>
+<script src="./js/vendor.min.js"></script>
+<!-- [END] Скрипты библиотек-->
+<!-- [ START ] Скрипты проекта-->
+<script src="./js/production.min.js"></script>
+<!-- [END] Скрипты проекта-->
+</body>
+</html>
