@@ -1,47 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-
+    <title>AngularJS • TodoMVC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 </head>
-<body ng-app="angularStarter" ng-controller="HelloCtrl">
-    Say hello to: <input type="text" ng-model="name">
-    <h1>Hello, {{name}}!</h1>
-    <h2>Hello, {{subName()}}!</h2>
-
-
-    <div class=container" ng-controller="TextAreaWithLimitCtrl">
-        <div class="row">
-            <p>Remaining: {{remaining()}}</p>
-            <textarea ng-model="message">{{message}}</textarea>
+<body ng-app="todomvc">
+<main class="container">
+    <section todo-list id="todoapp">
+        <header id="header">
+            <h1>todos</h1>
+            <form name="todoForm" ng-submit="addTodo()" class="form-group">
+                <input id="new-todo" placeholder="Что нужно сделать?" ng-model="newTodo" autofocus class="form-control">
+            </form>
+        </header>
+        <div ng-if="todos.length">
+            <p>Заданий к выполнению: {{todos.length}}</p>
+            <ul id="todo-list" class="list-group">
+                <li ng-repeat="todo in todos" class="list-group-item">
+                    <div class="view">
+                        <label>{{todo.title}}</label>
+                        <button ng-click="removeTodo(todo)" class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="row">
-            <button ng-click="send()" ng-disabled="!message">Send</button>
-            <button ng-click="clear()">Clear</button>
-        </div>
-    </div>
+        <p ng-if="!todos.length">Вы не добавили заданий.</p>
+
+    </section>
+</main>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-    <script>
-        angular.module('angularStarter', [])
-                .controller('HelloCtrl', function ($scope) {
-                    $scope.name = "World";
-                    $scope.subName = function () {
-                        return 'Everyone!'
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script>
+
+    angular.module('todomvc', [])
+            .directive('todoList', function () {
+
+                return {
+                    scope: true,
+                    link: function($scope){
+                        $scope.todos = [];
+                        $scope.newTodo = '';
+
+                        $scope.addTodo = () => {
+                            var newTodo = {
+                                title: $scope.newTodo.trim()
+                            };
+
+                            if (newTodo.title) {
+                                $scope.todos.push(newTodo);
+                                $scope.newTodo = '';
+                            }
+                        };
+
+                        $scope.removeTodo = (todo) => {
+                            $scope.todos.splice($scope.todos.indexOf(todo), 1);
+                        };
                     }
-                }).controller('TextAreaWithLimitCtrl', function ($scope) {
-                    $scope.remaining = function () {
-                        return $scope.message ? $scope.message.length : '0';
-                    };
-                    $scope.send = function () {
-                        alert($scope.message)
-                    };
-                    $scope.clear = function () {
-                        $scope.message = '';
-                    }
-                });
-
-    </script>
-
+                }
+            });
+</script>
 </body>
 </html>
